@@ -1,4 +1,4 @@
-name: JarvisAPI
-main: fr.nkri.japi.JarvisAPI
+name: JAPI
+main: fr.nkri.japi.JAPI
 author: NKRI
 version: 1.0

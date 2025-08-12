@@ -5,7 +5,7 @@ import fr.nkri.japi.cmds.ICommand;
 import fr.nkri.japi.cmds.interfaces.Command;
 import fr.nkri.japi.modules.Module;
 import fr.nkri.japi.modules.ModuleManager;
-import fr.nkri.japi.utils.JarvisUtils;
+import fr.nkri.japi.utils.JUtils;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
@@ -42,14 +42,14 @@ public class CommandModule extends ICommand {
                 final Module module = this.manager.getModuleByName(moduleName);
 
                 if(module == null){
-                    sender.sendMessage("§7§l(§9§lJ-Modules§7§l)§r§c Le module '%name%' n'existe pas.".replace("%name%", moduleName));
+                    sender.sendMessage("§7§l(§9§lJModules§7§l)§r§c Le module '%name%' n'existe pas.".replace("%name%", moduleName));
                     return false;
                 }
 
                 final boolean toggle = !module.isEnable();
                 final String state = toggle ? "§a§lActivé" : "§c§lDésactivé";
                 module.setEnable(toggle);
-                sender.sendMessage("§7§l(§9§lJ-Modules§7§l)§r§e État: %state%§r§e pour le module §6'%name%'"
+                sender.sendMessage("§7§l(§9§lJModules§7§l)§r§e État: %state%§r§e pour le module §6'%name%'"
                         .replace("%state%", state)
                         .replace("%name%", moduleName));
                 break;
@@ -65,14 +65,14 @@ public class CommandModule extends ICommand {
                             .replace("%state%", toggleString));
                 }
 
-                sender.sendMessage(JarvisUtils.LINE);
+                sender.sendMessage(JUtils.LINE);
                 sender.sendMessage("§7§l §9§lListe des modules:");
                 sender.sendMessage("");
                 for(String msg : lores){
                     sender.sendMessage(msg);
                 }
                 sender.sendMessage("");
-                sender.sendMessage(JarvisUtils.LINE);
+                sender.sendMessage(JUtils.LINE);
                 break;
             default:
                 showHelp(sender);
@@ -83,12 +83,12 @@ public class CommandModule extends ICommand {
 
     //Help me for sender
     private void showHelp(final CommandSender sender){
-        sender.sendMessage(JarvisUtils.LINE);
-        sender.sendMessage("§7§l» §9§lJ-Modules:");
+        sender.sendMessage(JUtils.LINE);
+        sender.sendMessage("§7§l» §9§lJModules:");
         sender.sendMessage("");
         sender.sendMessage("§6/jmodule <toggle> <name> §7: §echange l'état d'un module.");
         sender.sendMessage("§6/jmodule list §7: §erenvoie la liste des modules.");
         sender.sendMessage("");
-        sender.sendMessage(JarvisUtils.LINE);
+        sender.sendMessage(JUtils.LINE);
     }
 }

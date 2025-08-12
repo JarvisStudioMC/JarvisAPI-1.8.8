@@ -46,7 +46,7 @@ import java.util.stream.IntStream;
  * @author MrMicky
  * @version 3.0.4
  */
-public class JarvisInventory implements InventoryHolder {
+public class JInventory implements InventoryHolder {
 
     private final Map<Integer, Consumer<InventoryClickEvent>> itemHandlers = new HashMap<>();
     private final List<Consumer<InventoryOpenEvent>> openHandlers = new ArrayList<>();
@@ -62,7 +62,7 @@ public class JarvisInventory implements InventoryHolder {
      *
      * @param size The size of the inventory.
      */
-    public JarvisInventory(int size) {
+    public JInventory(int size) {
         this(owner -> Bukkit.createInventory(owner, size));
     }
 
@@ -72,7 +72,7 @@ public class JarvisInventory implements InventoryHolder {
      * @param size  The size of the inventory.
      * @param title The title (name) of the inventory.
      */
-    public JarvisInventory(int size, String title) {
+    public JInventory(int size, String title) {
         this(owner -> Bukkit.createInventory(owner, size, title));
     }
 
@@ -81,7 +81,7 @@ public class JarvisInventory implements InventoryHolder {
      *
      * @param type The type of the inventory.
      */
-    public JarvisInventory(InventoryType type) {
+    public JInventory(InventoryType type) {
         this(owner -> Bukkit.createInventory(owner, type));
     }
 
@@ -91,11 +91,11 @@ public class JarvisInventory implements InventoryHolder {
      * @param type  The type of the inventory.
      * @param title The title of the inventory.
      */
-    public JarvisInventory(InventoryType type, String title) {
+    public JInventory(InventoryType type, String title) {
         this(owner -> Bukkit.createInventory(owner, type, title));
     }
 
-    public JarvisInventory(Function<InventoryHolder, Inventory> inventoryFunction) {
+    public JInventory(Function<InventoryHolder, Inventory> inventoryFunction) {
         Objects.requireNonNull(inventoryFunction, "inventoryFunction");
         Inventory inv = inventoryFunction.apply(this);
 

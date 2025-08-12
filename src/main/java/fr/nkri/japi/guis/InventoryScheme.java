@@ -85,7 +85,7 @@ public class InventoryScheme {
      *
      * @param inv the FastInv instance to apply this scheme to
      */
-    public void apply(JarvisInventory inv) {
+    public void apply(JInventory inv) {
         for (int line = 0; line < this.masks.size(); line++) {
             String mask = this.masks.get(line);
 

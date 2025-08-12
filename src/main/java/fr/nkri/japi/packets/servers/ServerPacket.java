@@ -1,6 +1,6 @@
 package fr.nkri.japi.packets.servers;
 
-import fr.nkri.japi.packets.JarvisPacket;
+import fr.nkri.japi.packets.JPacket;
 import net.minecraft.server.v1_8_R3.PacketDataSerializer;
 import net.minecraft.server.v1_8_R3.PacketListener;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.IOException;
 import java.util.UUID;
 
-public abstract class ServerPacket extends JarvisPacket {
+public abstract class ServerPacket extends JPacket {
 
     @Override
     public void readPacket(final PacketDataSerializer reader) throws IOException {}

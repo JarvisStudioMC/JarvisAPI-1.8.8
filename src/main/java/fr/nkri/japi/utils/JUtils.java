@@ -1,15 +1,11 @@
 package fr.nkri.japi.utils;
 
-import fr.nkri.japi.JarvisAPI;
-import net.minecraft.server.v1_8_R3.WorldServer;
+import fr.nkri.japi.JAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -21,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class JarvisUtils {
+public class JUtils {
 
     public static String LINE = "§7—————————————————————————————————————";
 
@@ -109,7 +105,7 @@ public class JarvisUtils {
             e.printStackTrace();
         }
 
-        player.sendPluginMessage(JarvisAPI.getInstance(), "BungeeCord", b.toByteArray());
+        player.sendPluginMessage(JAPI.getInstance(), "BungeeCord", b.toByteArray());
     }
 
     public static String transformColor(final String color){

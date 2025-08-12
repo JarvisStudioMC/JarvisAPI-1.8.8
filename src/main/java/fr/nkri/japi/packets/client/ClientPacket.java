@@ -1,13 +1,13 @@
 package fr.nkri.japi.packets.client;
 
-import fr.nkri.japi.packets.JarvisPacket;
+import fr.nkri.japi.packets.JPacket;
 import net.minecraft.server.v1_8_R3.PacketDataSerializer;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.IOException;
 
-public abstract class ClientPacket extends JarvisPacket {
+public abstract class ClientPacket extends JPacket {
 
     @Override
     public void writePacket(final PacketDataSerializer packetDataSerializer) throws IOException {}

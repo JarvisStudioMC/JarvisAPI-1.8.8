@@ -3,14 +3,14 @@ package fr.nkri.japi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import fr.nkri.japi.cmds.CommandFramework;
-import fr.nkri.japi.guis.JarvisInvManager;
+import fr.nkri.japi.guis.JInvManager;
 import fr.nkri.japi.logs.Logs;
 import fr.nkri.japi.logs.enums.LogsType;
 import fr.nkri.japi.modules.Module;
 import fr.nkri.japi.modules.ModuleManager;
 import fr.nkri.japi.modules.cmds.CommandModule;
+import fr.nkri.japi.packets.JPacket;
 import fr.nkri.japi.packets.PacketManager;
-import fr.nkri.japi.packets.JarvisPacket;
 import fr.nkri.japi.utils.json.adapter.ItemStackAdpater;
 import fr.nkri.japi.utils.json.adapter.LocationAdapter;
 import org.bukkit.Location;
@@ -28,9 +28,9 @@ import java.util.List;
  * @date 10/03/2024
  */
 
-public class JarvisAPI extends JavaPlugin {
+public class JAPI extends JavaPlugin {
 
-    private static JarvisAPI INSTANCE;
+    private static JAPI INSTANCE;
     private CommandFramework commandFramework;
     private Gson gson;
     private PacketManager packetManager;
@@ -38,36 +38,36 @@ public class JarvisAPI extends JavaPlugin {
     //module management
     private ModuleManager moduleManager;
 
-    public JarvisAPI(){}
+    public JAPI(){}
 
     @Override
     public void onEnable() {
         INSTANCE = this;
-        Logs.sendLog("", "-------------------[JARVIS API]-------------------", LogsType.INFO);
-        Logs.sendLog("[JarvisAPI]", "Starting... Please wait for the initialization process to complete.", LogsType.INFO);
+        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Starting... Please wait for the initialization process to complete.", LogsType.INFO);
         this.commandFramework = new CommandFramework(this);
         this.gson = getGsonBuilder().create();
-        JarvisInvManager.register(this);
+        JInvManager.register(this);
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         super.onEnable();
 
-        Logs.sendLog("[JarvisAPI]", "Plugin successfully loaded, developed by Jarvis Studio by NKRI", LogsType.INFO);
-        Logs.sendLog("", "-------------------[JARVIS API]-------------------", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Plugin successfully loaded, developed by Jarvis Studio by NKRI", LogsType.INFO);
+        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
     }
 
     @Override
     public void onDisable() {
-        Logs.sendLog("", "-------------------[JARVIS API]-------------------", LogsType.INFO);
-        Logs.sendLog("[JarvisAPI]", "Plugin successfully unloaded, thank you for using Jarvis.", LogsType.INFO);
+        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Plugin successfully unloaded, thank you for using Jarvis.", LogsType.INFO);
 
         if(this.moduleManager != null){
             this.moduleManager.saveAll();
         }
 
         super.onDisable();
-        Logs.sendLog("[JarvisAPI]", "Good Bye ! Thanks for using JarvisAPI, plugin being unloaded.", LogsType.INFO);
-        Logs.sendLog("[JarvisAPI]", "Developed by Jarvis Studio by NKRI.", LogsType.INFO);
-        Logs.sendLog("", "-------------------[JARVIS API]-------------------", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Good Bye ! Thanks for using JAPI, plugin being unloaded.", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Developed by Jarvis Studio by NKRI.", LogsType.INFO);
+        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
     }
 
     //module
@@ -83,8 +83,8 @@ public class JarvisAPI extends JavaPlugin {
     }
     //module
 
-    public void registerPacket(final JarvisPacket wizPacket, final int id){
-        packetManager.registerPacket(wizPacket, id);
+    public void registerPacket(final JPacket jPacket, final int id){
+        packetManager.registerPacket(jPacket, id);
     }
 
     public void registerPackets(){
@@ -122,7 +122,7 @@ public class JarvisAPI extends JavaPlugin {
         return gson;
     }
 
-    public static JarvisAPI getInstance() {
+    public static JAPI getInstance() {
         return INSTANCE;
     }
 }

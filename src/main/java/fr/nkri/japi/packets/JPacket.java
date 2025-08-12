@@ -6,7 +6,7 @@ import net.minecraft.server.v1_8_R3.PacketListener;
 
 import java.io.IOException;
 
-public abstract class JarvisPacket implements Packet {
+public abstract class JPacket implements Packet {
 
     @Override
     public void a(final PacketDataSerializer packet) throws IOException {

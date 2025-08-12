@@ -1,6 +1,6 @@
 package fr.nkri.japi.modules;
 
-import fr.nkri.japi.JarvisAPI;
+import fr.nkri.japi.JAPI;
 import fr.nkri.japi.logs.Logs;
 import fr.nkri.japi.logs.enums.LogsType;
 
@@ -9,14 +9,14 @@ import java.util.List;
 
 public class ModuleManager {
 
-    private final JarvisAPI main;
+    private final JAPI main;
     private static ModuleManager INSTANCE;
     private final List<Module> modules;
 
     /**
      * allows you to manage modules
      */
-    public ModuleManager(final JarvisAPI main){
+    public ModuleManager(final JAPI main){
         this.main = main;
         INSTANCE = this;
         this.modules = new ArrayList<>();

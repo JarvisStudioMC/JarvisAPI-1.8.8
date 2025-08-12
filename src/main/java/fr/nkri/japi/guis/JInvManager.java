@@ -41,11 +41,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author MrMicky
  */
-public final class JarvisInvManager {
+public final class JInvManager {
 
     private static final AtomicBoolean REGISTERED = new AtomicBoolean(false);
 
-    private JarvisInvManager() {
+    private JInvManager() {
         throw new UnsupportedOperationException();
     }
 
@@ -71,7 +71,7 @@ public final class JarvisInvManager {
      */
     public static void closeAll() {
         for(Player player : Bukkit.getServer().getOnlinePlayers()) {
-            if(player.getOpenInventory().getTopInventory().getHolder() instanceof JarvisInventory) {
+            if(player.getOpenInventory().getTopInventory().getHolder() instanceof JInventory) {
                 player.closeInventory();
             }
         }
@@ -87,8 +87,8 @@ public final class JarvisInvManager {
 
         @EventHandler
         public void onInventoryClick(InventoryClickEvent e) {
-            if (e.getInventory().getHolder() instanceof JarvisInventory && e.getClickedInventory() != null) {
-                JarvisInventory inv = (JarvisInventory) e.getInventory().getHolder();
+            if (e.getInventory().getHolder() instanceof JInventory && e.getClickedInventory() != null) {
+                JInventory inv = (JInventory) e.getInventory().getHolder();
 
                 boolean wasCancelled = e.isCancelled();
                 e.setCancelled(true);
@@ -104,8 +104,8 @@ public final class JarvisInvManager {
 
         @EventHandler
         public void onInventoryOpen(InventoryOpenEvent e) {
-            if (e.getInventory().getHolder() instanceof JarvisInventory) {
-                JarvisInventory inv = (JarvisInventory) e.getInventory().getHolder();
+            if (e.getInventory().getHolder() instanceof JInventory) {
+                JInventory inv = (JInventory) e.getInventory().getHolder();
 
                 inv.handleOpen(e);
             }
@@ -113,8 +113,8 @@ public final class JarvisInvManager {
 
         @EventHandler
         public void onInventoryClose(InventoryCloseEvent e) {
-            if (e.getInventory().getHolder() instanceof JarvisInventory) {
-                JarvisInventory inv = (JarvisInventory) e.getInventory().getHolder();
+            if (e.getInventory().getHolder() instanceof JInventory) {
+                JInventory inv = (JInventory) e.getInventory().getHolder();
 
                 if (inv.handleClose(e)) {
                     Bukkit.getScheduler().runTask(this.plugin, () -> inv.open((Player) e.getPlayer()));

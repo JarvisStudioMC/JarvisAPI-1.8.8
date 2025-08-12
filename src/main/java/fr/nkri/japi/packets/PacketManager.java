@@ -53,7 +53,7 @@ public class PacketManager {
                 final Map<Class<?>, EnumProtocol> protocols = (Map) h.get(protocol);
                 protocols.put(packetMinecraft.getClass(), protocol);
 
-                Logs.sendLog("(JarvisPacket)", "Register packet " + packet.getId(), LogsType.INFO);
+                Logs.sendLog("(JPacket)", "Register packet " + packet.getId(), LogsType.INFO);
             }
         }
         catch (Exception e) {

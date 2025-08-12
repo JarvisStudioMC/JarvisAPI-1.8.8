@@ -1,7 +1,7 @@
 package fr.nkri.japi.modules;
 
-import fr.nkri.japi.JarvisAPI;
-import fr.nkri.japi.packets.JarvisPacket;
+import fr.nkri.japi.JAPI;
+import fr.nkri.japi.packets.JPacket;
 import net.minecraft.server.v1_8_R3.ICommand;
 import org.bukkit.event.Listener;
 
@@ -20,17 +20,17 @@ public abstract class Module {
 
     //register an cmd
     public void registerCommand(final ICommand iCommand){
-        JarvisAPI.getInstance().registerCommand(iCommand);
+        JAPI.getInstance().registerCommand(iCommand);
     }
 
     //register a listener
     public void registerListener(final Listener listener){
-        JarvisAPI.getInstance().registerListeners(listener);
+        JAPI.getInstance().registerListeners(listener);
     }
 
     //register packets
-    public void registerPacket(final JarvisPacket packet, final int packetId){
-        JarvisAPI.getInstance().registerPacket(packet, packetId);
+    public void registerPacket(final JPacket packet, final int packetId){
+        JAPI.getInstance().registerPacket(packet, packetId);
     }
 
     //save data
