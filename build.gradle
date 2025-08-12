@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group = 'fr.nkri.japi'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //libs spigot 1.8.8
+    implementation fileTree("libs")
+}
