@@ -8,6 +8,7 @@ import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.List;
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * Class used to execute Discord Webhooks with low effort
@@ -385,4 +386,72 @@ public class DiscordWebhook {
         }
     }
 
+    /*
+    Webhook discord with configuration
+     */
+    public DiscordWebhook embed(final Consumer<EmbedObject> consumer) {
+        final EmbedObject embed = new EmbedObject();
+        consumer.accept(embed);
+        this.embeds.add(embed);
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public DiscordWebhook applyYaml(
+            org.bukkit.configuration.ConfigurationSection section,
+            Map<String, String> placeholders
+    ) {
+        if (section == null) return this;
+
+        setContent(replace(section.getString("content"), placeholders));
+        setUsername(section.getString("username"));
+        setAvatarUrl(section.getString("avatar"));
+
+        if (section.isList("embeds")) {
+            for (Map<?, ?> embedMap : section.getMapList("embeds")) {
+                embed(e -> applyEmbed(e, embedMap, placeholders));
+            }
+        }
+
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void applyEmbed(
+            EmbedObject embed,
+            Map<?, ?> map,
+            Map<String, String> placeholders
+    ) {
+        embed.setTitle(replace((String) map.get("title"), placeholders));
+        embed.setDescription(replace((String) map.get("description"), placeholders));
+
+        if (map.containsKey("color")) {
+            embed.setColor(Color.decode((String) map.get("color")));
+        }
+
+        if (map.containsKey("fields")) {
+            List<Map<String, Object>> fields =
+                    (List<Map<String, Object>>) map.get("fields");
+
+            for (Map<String, Object> field : fields) {
+                embed.addField(
+                        replace((String) field.get("name"), placeholders),
+                        replace((String) field.get("value"), placeholders),
+                        (boolean) field.getOrDefault("inline", false)
+                );
+            }
+        }
+    }
+
+    private String replace(String input, Map<String, String> values) {
+        if (input == null || values == null) return input;
+
+        for (Map.Entry<String, String> entry : values.entrySet()) {
+            input = input.replace(
+                    "{" + entry.getKey() + "}",
+                    entry.getValue()
+            );
+        }
+        return input;
+    }
 }
