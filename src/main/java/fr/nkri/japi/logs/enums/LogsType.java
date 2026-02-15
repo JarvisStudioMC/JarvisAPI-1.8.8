@@ -6,7 +6,7 @@ public enum LogsType {
 
     ERROR(ChatColor.RED.toString()),
     WARNING(ChatColor.YELLOW.toString()),
-    SUCCES(ChatColor.GREEN.toString()),
+    SUCCESS(ChatColor.GREEN.toString()),
     INFO(ChatColor.AQUA.toString()),
     ;
 

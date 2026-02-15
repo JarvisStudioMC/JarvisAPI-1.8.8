@@ -43,31 +43,67 @@ public class JAPI extends JavaPlugin {
     @Override
     public void onEnable() {
         INSTANCE = this;
-        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
-        Logs.sendLog("[JAPI]", "Starting... Please wait for the initialization process to complete.", LogsType.INFO);
+
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
+        Logs.sendLog("", "           JAPI - Jarvis API v1.0           ", LogsType.INFO);
+        Logs.sendLog("", "     Developed by Jarvis Studio by NKRI    ", LogsType.INFO);
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Initializing components...", LogsType.INFO);
+
+        //Command framework
+        Logs.sendLog("[JAPI]", "Loading Command Framework...", LogsType.INFO);
         this.commandFramework = new CommandFramework(this);
+        Logs.sendLog("[JAPI]", "Command Framework loaded successfully", LogsType.SUCCESS);
+
+        //Gson
+        Logs.sendLog("[JAPI]", "Initializing JSON serializer...", LogsType.INFO);
         this.gson = getGsonBuilder().create();
+        Logs.sendLog("[JAPI]", "Gson initialized successfully", LogsType.SUCCESS);
+
+        //Packet manager
+        Logs.sendLog("[JAPI]", "Initializing Packet Manager...", LogsType.INFO);
+        this.packetManager = new PacketManager();
+        Logs.sendLog("[JAPI]", "Packet Manager ready", LogsType.SUCCESS);
+
+        //Inventory manager
+        Logs.sendLog("[JAPI]", "Registering Inventory Manager...", LogsType.INFO);
         JInvManager.register(this);
+        Logs.sendLog("[JAPI]", "Inventory Manager registered", LogsType.SUCCESS);
+
+        //Bungeecord channel
+        Logs.sendLog("[JAPI]", "Opening BungeeCord channel...", LogsType.INFO);
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        Logs.sendLog("[JAPI]", "BungeeCord channel opened", LogsType.SUCCESS);
+
         super.onEnable();
 
-        Logs.sendLog("[JAPI]", "Plugin successfully loaded, developed by Jarvis Studio by NKRI", LogsType.INFO);
-        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Plugin enabled successfully!", LogsType.SUCCESS);
+        Logs.sendLog("[JAPI]", "All systems operational", LogsType.INFO);
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
     }
 
     @Override
     public void onDisable() {
-        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
-        Logs.sendLog("[JAPI]", "Plugin successfully unloaded, thank you for using Jarvis.", LogsType.INFO);
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Shutting down JAPI...", LogsType.INFO);
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
 
-        if(this.moduleManager != null){
+        //Save modules
+        if (this.moduleManager != null) {
+            Logs.sendLog("[JAPI]", "Saving all modules...", LogsType.INFO);
+            int savedModules = this.moduleManager.getModules().size();
             this.moduleManager.saveAll();
+            Logs.sendLog("[JAPI]", savedModules + " module(s) saved successfully", LogsType.SUCCESS);
         }
 
         super.onDisable();
-        Logs.sendLog("[JAPI]", "Good Bye ! Thanks for using JAPI, plugin being unloaded.", LogsType.INFO);
-        Logs.sendLog("[JAPI]", "Developed by Jarvis Studio by NKRI.", LogsType.INFO);
-        Logs.sendLog("", "-------------------[JAPI]-------------------", LogsType.INFO);
+
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Plugin disabled successfully", LogsType.SUCCESS);
+        Logs.sendLog("[JAPI]", "Thank you for using JAPI!", LogsType.INFO);
+        Logs.sendLog("[JAPI]", "Developed by Jarvis Studio by NKRI", LogsType.INFO);
+        Logs.sendLog("", "════════════════════════════════════════════", LogsType.INFO);
     }
 
     //module

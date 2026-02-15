@@ -12,10 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class JUtils {
 
@@ -243,5 +240,25 @@ public class JUtils {
 
         double value = Double.parseDouble(str);
         return value > 0;
+    }
+
+    public static <V> UUID generateUniqueUUID(final Map<UUID, V> map) {
+        UUID uuid;
+
+        do {
+            uuid = UUID.randomUUID();
+        }
+        while (map.containsKey(uuid));
+        return uuid;
+    }
+
+    public static UUID generateUniqueUUID(final Collection<UUID> collection) {
+        UUID uuid;
+
+        do {
+            uuid = UUID.randomUUID();
+        }
+        while (collection.contains(uuid));
+        return uuid;
     }
 }

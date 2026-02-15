@@ -39,18 +39,42 @@ public class ModuleManager {
     //add a module in list
     public void registerModule(final Module module){
         this.modules.add(module);
-        Logs.sendLog("[JModule]", "The '%name%' module has just been loaded".replace("%name%", module.getName()),
-                LogsType.SUCCES);
+        Logs.sendLog("[JModule]", "Module '" + module.getName() + "' registered successfully", LogsType.SUCCESS);
     }
 
     //save data
     public void loadAll() {
-        modules.forEach(Module::load);
-        //main.registerPackets();
+        Logs.sendLog("[JModule]", "Loading " + this.modules.size() + " module(s)...", LogsType.INFO);
+
+        this.modules.forEach(module -> {
+            try {
+                module.load();
+                Logs.sendLog("[JModule]", "'" + module.getName() + "' loaded", LogsType.SUCCESS);
+            }
+            catch (final Exception e) {
+                Logs.sendLog("[JModule]", "Failed to load '" + module.getName() + "'", LogsType.ERROR);
+                e.printStackTrace();
+            }
+        });
+
+        Logs.sendLog("[JModule]", "All modules loaded successfully!", LogsType.SUCCESS);
     }
 
     public void saveAll() {
-        modules.forEach(Module::save);
+        Logs.sendLog("[JModule]", "Saving " + this.modules.size() + " module(s)...", LogsType.INFO);
+
+        this.modules.forEach(module -> {
+            try {
+                module.save();
+                Logs.sendLog("[JModule]", "'" + module.getName() + "' saved", LogsType.SUCCESS);
+            }
+            catch (final Exception e) {
+                Logs.sendLog("[JModule]", "Failed to save '" + module.getName() + "'", LogsType.ERROR);
+                e.printStackTrace();
+            }
+        });
+
+        Logs.sendLog("[JModule]", "All modules saved successfully!", LogsType.SUCCESS);
     }
     //save data
 
